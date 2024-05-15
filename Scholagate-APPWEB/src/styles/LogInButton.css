@@ -1,0 +1,5 @@
+.gradient-button {
+  background: linear-gradient(to bottom right, #ff8e2b, #2e77ae);
+  border: none;
+  color: white; /* Esto hará que el texto del botón sea blanco */
+}
