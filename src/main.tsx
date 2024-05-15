@@ -12,15 +12,6 @@ import HomePage from "./pages/PasswordPage";
 import LogInPage from "./pages/LogInPage";
 import PasswordPage from "./pages/PasswordPage";
 
-var express = require("express");
-var mime = require("mime");
-
-var app = express();
-
-app.use(function (req, res, next) {
-  mime.lookup(req.path); // => 'application/javascript'
-  next();
-});
 const rootContainer = document.getElementById("root");
 
 const PassWordPageWrapper = () => {
