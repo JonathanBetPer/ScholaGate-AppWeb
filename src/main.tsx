@@ -7,10 +7,10 @@ import {
   useParams,
 } from "react-router-dom";
 import "./index.css";
-import AdminPage from "./pages/AdminPage";
-import HomePage from "./pages/PasswordPage";
+import HomePage from "./pages/HomePage.tsx";
 import LogInPage from "./pages/LogInPage";
 import PasswordPage from "./pages/PasswordPage";
+import AdminPage from "./pages/AdminPage.tsx";
 
 const rootContainer = document.getElementById("root");
 
@@ -26,6 +26,7 @@ createRoot(rootContainer).render(
       <Routes>
         <Route path="/" element={<LogInPage />} />
         <Route path="/passwd/*" element={<PassWordPageWrapper />} />
+        <Route path="/home/*" element={<HomePage />} />
         <Route path="/admin/*" element={<AdminPage />} />
 
         {/* Añade más rutas aquí si es necesario */}

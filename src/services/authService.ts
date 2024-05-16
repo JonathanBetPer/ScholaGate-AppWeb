@@ -22,10 +22,11 @@ export async function login(nombreUsuario, password) {
 }
 
 export async function getUsers() {
+  const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/usuarios`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${jwt}`, // Envía el JWT en el encabezado 'Authorization'
+      Authorization: `Bearer ${token}`, // Envía el JWT en el encabezado 'Authorization'
       "Content-Type": "application/json",
     },
   });
@@ -41,10 +42,11 @@ export async function getUsers() {
 }
 
 export async function getAlumnos() {
-  const response = await fetch(`${API_URL}/alumnos/`, {
+  const token = localStorage.getItem("jwt");
+  const response = await fetch(`${API_URL}/alumnos`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${jwt}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
+      Authorization: `Bearer ${token}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
       "Content-Type": "application/json",
     },
   });
@@ -61,10 +63,11 @@ export async function getAlumnos() {
 }
 
 export async function getReportes() {
+  const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/reportes`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -91,11 +94,12 @@ export async function getReportes() {
 }
 
 export async function getUsuarioActual() {
+  const token = localStorage.getItem("jwt");
   try {
     const response = await fetch(`${API_URL}/usuario`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -114,10 +118,11 @@ export async function getUsuarioActual() {
   }
 }
 export async function getUsuarioById(id) {
+  const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/usuario/${id}`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${jwt}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
+      Authorization: `Bearer ${token}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
       "Content-Type": "application/json",
     },
   });
@@ -134,10 +139,11 @@ export async function getUsuarioById(id) {
 }
 
 export async function getAlumnoById(id) {
+  const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/alumno/${id}`, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -170,7 +176,7 @@ export async function cambioContraseña(password: string, token: string) {
   }
 
   const data = await response.text();
-  return data 
+  return data;
 }
 
 export async function pedirCambioContraseña(idUsuario: number) {

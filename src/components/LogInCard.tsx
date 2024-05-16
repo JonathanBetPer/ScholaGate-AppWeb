@@ -16,10 +16,6 @@ const LogInCard = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // Antes de comenzar el proceso de inicio de sesión, establece isProcessing en true
-    setIsProcessing(true);
-    setButtonText("Iniciando Sesión...");
-
     if (!nombre || !password) {
       alert("El nombre y la contraseña son obligatorios.");
       // Aquí utilizamos setTimeout para esperar 2 segundos antes de cambiar el estado de isProcessing y el texto del botón
@@ -47,23 +43,30 @@ const LogInCard = () => {
       }, 2000);
       return;
     }
+
+    // Antes de comenzar el proceso de inicio de sesión, establece isProcessing en true
+    setIsProcessing(true);
+    setButtonText("Iniciando Sesión...");
+
     // Aquí puedes añadir más comprobaciones para la contraseña y otros campos si lo necesitas
 
     try {
       const message = await login(nombre, password);
       console.log(message);
-      alert(message);
       localStorage.setItem("jwt", message);
-      const usuario = await getUsuarioActual();
+      const usuario = await getUsuarioActual(message);
+      console.log(usuario);
       localStorage.setItem("usuario", usuario.rol);
       // Cambia el texto del botón a un mensaje estático
       setButtonText("Inicio de sesión exitoso");
+
       setTimeout(() => {
         setIsProcessing(false);
-        navigate("/admin");
+        navigate("/home");
       }, 2000);
     } catch (error) {
       console.error(error);
+      alert("Usuario o contraseña incorrectos.");
       setTimeout(() => {
         setButtonText("Iniciar Sesión");
         setIsProcessing(false);

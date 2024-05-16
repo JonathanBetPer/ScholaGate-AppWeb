@@ -6,21 +6,20 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-
 import "../styles/TableReportes.css";
-
+import fotoperfilAlumno from "../images/fotoperfilAlumno.png";
 import React, { useEffect, useState } from "react";
-import { getReportes } from "../services/authService"; // Asegúrate de reemplazar esto con la ruta correcta a authservice
+import { getAlumnos } from "../services/authService"; // Asegúrate de reemplazar esto con la ruta correcta a authservice
 
-function TablaReportes({ data, columns }) {
+function TablaAlumnos({ data, columns }) {
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
 
-  const [reportes, setReportes] = useState([]);
+  const [alumnos, setAlumnos] = useState([]);
 
   useEffect(() => {
-    getReportes(localStorage.getItem("jwt")).then((data) => {
-      setReportes(data);
+    getAlumnos().then((data) => {
+      setAlumnos(data);
     });
   }, []);
 
@@ -49,9 +48,8 @@ function TablaReportes({ data, columns }) {
           fontSize: "24px",
         }}
       >
-        <h1>Registro de Reportes Global</h1>
+        <h1>Lista de alumnos</h1>
       </div>
-
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -81,13 +79,15 @@ function TablaReportes({ data, columns }) {
           ))}
         </thead>
         <tbody>
-          {reportes.map((reporte) => (
-            <tr key={reporte.id}>
-              <td>{reporte.idAlumno}</td>
-              <td>{reporte.idUsuario}</td>
-              <td>{reporte.tipo}</td>
-              <td>{reporte.motivo}</td>
-              <td>{reporte.fecha}</td>
+          {alumnos.map((alumno) => (
+            <tr key={alumno.id}>
+              <td>{alumno.id}</td>
+              <td>{alumno.idGrupo}</td>
+              <td>{alumno.nombre}</td>
+              <td>{alumno.fechaNac}</td>
+              <td>
+                <img src={fotoperfilAlumno} alt="Foto de perfil del alumno" />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -110,4 +110,4 @@ function TablaReportes({ data, columns }) {
   );
 }
 
-export default TablaReportes;
+export default TablaAlumnos;

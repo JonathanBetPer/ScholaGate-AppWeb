@@ -1,125 +1,65 @@
 import Header from "../components/Header";
 import styled from "styled-components";
-import UserCard from "../components/UserCard";
-import TablaReportes from "../components/TablaReportes";
-import TablaUsuarios from "../components/TablaUsuarios";
-import dayjs from "dayjs";
-import { getReportes } from "../services/authService";
-import { getUsers } from "../services/authService";
 import React, { useState, useEffect } from "react";
 import { getUsuarioActual } from "../services/authService";
+import { getAlumnos } from "../services/authService";
+import TablaAlumnos from "../components/TablaAlumnos";
 
-const TablaReportesStyled = styled.div`
-  padding-bottom: 20px;
-`;
-
-const TablaUsuariosStyled = styled.div`
+const TablaAlumnosStyled = styled.div`
   padding-top: 20px;
 `;
 
 const columnsAlumnos = [
-  {
-    header: "Alumno",
-    accessorKey: "id",
-  },
-
-  {
-    header: "Profesor",
-    accessorKey: "name",
-  },
-  {
-    header: "Tipo",
-    accessorKey: "lastname",
-  },
-  {
-    header: "Motivo",
-    accessorKey: "email",
-  },
-  {
-    header: "Fecha",
-    accessorKey: "country",
-  },
-];
-
-const columnsUsuarios = [
   {
     header: "id",
     accessorKey: "id",
   },
 
   {
-    header: "Nombre",
+    header: "idGrupo",
     accessorKey: "name",
   },
   {
-    header: "Correo",
+    header: "nombre",
     accessorKey: "lastname",
   },
   {
-    header: "Rol",
+    header: "Fecha Nacimiento",
     accessorKey: "email",
   },
   {
-    header: "Seleccionar",
-    id: "select",
-    Cell: ({ row }) => (
-      <button
-        onClick={() => setSelectedUser(row.original)}
-        style={{ display: "block", opacity: 1 }}
-      >
-        Seleccionar
-      </button>
-    ),
+    header: "Foto",
+    accessorKey: "country",
   },
 ];
 
-const HomePage = () => {
-  const [reportes, setReportes] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
+const AdminPage = () => {
+  const [alumnos, setAlumnos] = useState([]);
 
   useEffect(() => {
-    getUsuarioActual()
+    getAlumnos()
       .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error obteniendo el usuario actual:", error);
-      });
-
-    getReportes()
-      .then((data) => {
-        setReportes(data);
+        setAlumnos(data);
       })
       .catch((error) => {
         console.error("Error obteniendo los reportes:", error);
-      });
-
-    getUsers()
-      .then((data) => {
-        setUsuarios(data);
-      })
-      .catch((error) => {
-        console.error("Error obteniendo los usuarios:", error);
       });
   }, []);
 
   return (
     <Container>
       <Header />
-      <UserCard />
-      <TablaReportesStyled>
-        <TablaReportes data={reportes} columns={columnsAlumnos} />
-      </TablaReportesStyled>
-      <TablaUsuariosStyled>
-        <TablaUsuarios data={usuarios} columns={columnsUsuarios} />
-      </TablaUsuariosStyled>
+      <TablaAlumnosStyled>
+        <TablaAlumnos data={alumnos} columns={columnsAlumnos} />
+      </TablaAlumnosStyled>
     </Container>
   );
 };
 
-export default HomePage;
+export default AdminPage;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5rem; // Ajusta este valor según tus necesidades
 `;
