@@ -62,6 +62,27 @@ export async function getAlumnos() {
   return data;
 }
 
+export async function getGrupos() {
+  const token = localStorage.getItem("jwt");
+  const response = await fetch(`${API_URL}/gruposInfo`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error del servidor:", errorText);
+    throw new Error("Error del servidor");
+  }
+
+  const data = await response.json();
+  console.log(data); // Imprime los datos devueltos
+  return data;
+}
+
 export async function getReportes() {
   const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/reportes`, {
@@ -202,4 +223,28 @@ export async function pedirCambioContraseña(idUsuario: number) {
 
   const data = await response.text();
   return data;
+}
+
+
+export async function deleteAlumnoById(id) {
+  const token = localStorage.getItem("jwt");
+  const response = await fetch(`${API_URL}/alumno/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`, // Añade esta línea para enviar el token JWT en la cabecera 'Authorization
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error del servidor:", errorText);
+    throw new Error(errorText || "Error del servidor");
+  }
+
+  if (response.headers.get("content-type")?.includes("application/json")) {
+    const data = await response.json();
+    console.log(data); // Imprime los datos devueltos
+    return data;
+  }
 }

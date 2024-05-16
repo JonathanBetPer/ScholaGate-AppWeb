@@ -4,32 +4,35 @@ import React, { useState, useEffect } from "react";
 import { getUsuarioActual } from "../services/authService";
 import { getAlumnos } from "../services/authService";
 import TablaAlumnos from "../components/TablaAlumnos";
-
 const TablaAlumnosStyled = styled.div`
   padding-top: 20px;
 `;
 
 const columnsAlumnos = [
   {
-    header: "id",
+    header: <div style={{ textAlign: 'center' }}>id</div>,
     accessorKey: "id",
   },
 
   {
-    header: "idGrupo",
+    header: <div style={{ textAlign: 'center' }}>idGrupo</div>,
     accessorKey: "name",
   },
   {
-    header: "nombre",
+    header: <div style={{ textAlign: 'center' }}>nombre</div>,
     accessorKey: "lastname",
   },
   {
-    header: "Fecha Nacimiento",
+    header: <div style={{ textAlign: 'center' }}>Fecha Nacimiento</div>,
     accessorKey: "email",
   },
   {
-    header: "Foto",
+    header: <div style={{ textAlign: 'center' }}>Foto</div>,
     accessorKey: "country",
+  },
+  {
+    header: <div style={{ textAlign: 'center' }}>Editar</div>,
+    accessorKey: "edit",
   },
 ];
 

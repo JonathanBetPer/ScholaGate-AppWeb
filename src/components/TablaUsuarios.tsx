@@ -12,6 +12,7 @@ import "../styles/TableReportes.css";
 import React, { useEffect, useState } from "react";
 import { getUsers } from "../services/authService"; // Asegúrate de reemplazar esto con la ruta correcta a authservice
 import { pedirCambioContraseña } from "../services/authService"; // Asegúrate de reemplazar esto con la ruta correcta a authservice
+import { getGrupos } from "../services/authService"; // Asegúrate de reemplazar esto con la ruta correcta a authservice
 
 function TablaUsuarios({ data, columns }) {
   const [sorting, setSorting] = useState([]);
