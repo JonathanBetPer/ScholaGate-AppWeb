@@ -82,8 +82,8 @@ const LogInCard = () => {
         <div className="mx-auto mt-0 flex h-full flex-col items-center justify-center space-y-4 sm:items-start md:items-center">
           <TextField
             className="z-1 m-2"
-            placeholderText="Nombre de Usuario"
-            title="Introduce tu nombre de usuario"
+            placeholderText="mail"
+            title="Introduce tu correo electrónico"
             icon={HiMail}
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}

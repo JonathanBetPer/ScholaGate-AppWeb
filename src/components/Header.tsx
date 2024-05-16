@@ -21,7 +21,7 @@ function Navbar() {
   return (
     <header>
       <h3>
-        <a href="https://e-asy.es/">
+        <a href="http://localhost:5173/">
           <img src={image} alt="" />
         </a>
       </h3>

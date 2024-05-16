@@ -40,12 +40,17 @@ function TablaReportes({ data, columns }) {
   });
 
   return (
-    <div>
-      <input
-        type="text"
-        value={filtering}
-        onChange={(e) => setFiltering(e.target.value)}
-      />
+    <div style={{ margin: "40px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        <h1>Registro de Reportes Global</h1>
+      </div>
 
       <table>
         <thead>
@@ -101,13 +106,6 @@ function TablaReportes({ data, columns }) {
           ))}
         </tfoot>
       </table>
-
-      <button onClick={() => table.setPageIndex(0)}>Primer Pagina</button>
-      <button onClick={() => table.previousPage()}>Pagina Anterior</button>
-      <button onClick={() => table.nextPage()}>Pagina Siguiente</button>
-      <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-        Ultima Pagina
-      </button>
     </div>
   );
 }

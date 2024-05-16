@@ -2,7 +2,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { cambioContraseña } from "../services/authService";
 
-export function Formulario() {
+export function Formulario({ setIsPasswordSet }) {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
@@ -13,6 +13,7 @@ export function Formulario() {
 
     if (password === repeatPassword) {
       await cambioContraseña(password, lastSegment);
+      setIsPasswordSet(true);
     } else {
       console.log("Las contraseñas no coinciden");
     }

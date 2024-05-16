@@ -50,7 +50,17 @@ function TablaUsuarios({ data, columns }) {
   });
 
   return (
-    <div>
+    <div style={{ margin: "40px" }}>
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        <h1>Lista de usuarios</h1>
+      </div>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
