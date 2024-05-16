@@ -169,8 +169,8 @@ export async function cambioContraseña(password: string, token: string) {
     throw new Error("Error del servidor");
   }
 
-  const data = await response.json(); // Parsea la respuesta como JSON
-  return data.token; // Devuelve solo el token
+  const data = await response.text();
+  return data 
 }
 
 export async function pedirCambioContraseña(idUsuario: number) {
@@ -194,8 +194,6 @@ export async function pedirCambioContraseña(idUsuario: number) {
     throw new Error("Error del servidor");
   }
 
-  const data = await response.text(); // Parsea la respuesta como texto
-  return data; // Devuelve la respuesta
+  const data = await response.text();
+  return data;
 }
-
-// Agrega más funciones para otras solicitudes aquí...
