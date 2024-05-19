@@ -225,7 +225,6 @@ export async function pedirCambioContraseña(idUsuario: number) {
   return data;
 }
 
-
 export async function deleteAlumnoById(id) {
   const token = localStorage.getItem("jwt");
   const response = await fetch(`${API_URL}/alumno/${id}`, {
@@ -245,6 +244,88 @@ export async function deleteAlumnoById(id) {
   if (response.headers.get("content-type")?.includes("application/json")) {
     const data = await response.json();
     console.log(data); // Imprime los datos devueltos
+    return data;
+  }
+}
+
+export async function updateAlumnoById(id, nombre, fechaNac, idGrupo, foto) {
+  const token = localStorage.getItem("jwt");
+
+  const body = { nombre, fechaNac, idGrupo, foto };
+  console.log(body); // Imprime el objeto que se está enviando
+
+  const response = await fetch(`${API_URL}/alumno/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body), // Elimina el id del cuerpo de la solicitud
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error del servidor:", errorText);
+    throw new Error(errorText || "Error del servidor");
+  }
+
+  if (response.headers.get("content-type")?.includes("application/json")) {
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+}
+export async function createAlumno(nombre, fechaNac, idGrupo, foto) {
+  const token = localStorage.getItem("jwt");
+
+  const body = { nombre, fechaNac, idGrupo, foto };
+  console.log(body); // Imprime el objeto que se está enviando
+
+  const response = await fetch(`${API_URL}/alumno`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error del servidor:", errorText);
+    throw new Error(errorText || "Error del servidor");
+  }
+
+  if (response.headers.get("content-type")?.includes("application/json")) {
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+}
+
+export async function createVariosAlumnos(alumnos) {
+  const token = localStorage.getItem("jwt");
+
+  console.log(alumnos); // Imprime el array de alumnos que se está enviando
+
+  const response = await fetch(`${API_URL}/alumnos`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: alumnos,
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error del servidor:", errorText);
+    throw new Error(errorText || "Error del servidor");
+  }
+
+  if (response.headers.get("content-type")?.includes("application/json")) {
+    const data = await response.json();
+    console.log(data);
     return data;
   }
 }
